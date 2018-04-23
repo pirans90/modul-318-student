@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
@@ -25,7 +26,7 @@ namespace SwissTransport
 
         public StationBoardRoot GetStationBoard(string station, string id)
         {
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?Station=" + station + "&id=" + id);
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?station=" + station + "&limit=" + id);
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 
@@ -38,6 +39,11 @@ namespace SwissTransport
             }
 
             return null;
+        }
+
+        public Connections GetConnections(string text)
+        {
+            throw new NotImplementedException();
         }
 
         public Connections GetConnections(string fromStation, string toStattion)
