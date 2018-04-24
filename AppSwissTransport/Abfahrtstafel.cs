@@ -18,7 +18,26 @@ namespace AppSwissTransport
         {
             InitializeComponent();
         }
-        private void btnSuche_Click(object sender, EventArgs e)
+
+        public void combox(ComboBox comboBoxName)
+        {
+            if (!string.IsNullOrEmpty(comboBoxName.Text))
+            {
+                List<Station> stations = transport.GetStations(comboBoxName.Text).StationList;
+                if (stations.Count > 0)
+                {
+                    comboBoxName.Items.Clear();
+                    foreach (Station station in stations)
+                    {
+                        comboBoxName.Items.Add(station.Name);
+                    }
+                }
+                comboBoxName.Text = "";
+                comboBoxName.SelectedIndex = 0;
+            }
+        }
+
+        private void btnSuche_Click_1(object sender, EventArgs e)
         {
             dgrdAbfahrtsTafel.Rows.Clear();
 
@@ -37,22 +56,10 @@ namespace AppSwissTransport
 
             cbAbfahrt.Text = "";
         }
-        public void combox(ComboBox comboBoxName)
+
+        private void btnAutoFill_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(comboBoxName.Text))
-            {
-                List<StationBoard> stations = transport.GetStationBoard(comboBoxName.Text, "10").Entries;
-                if (stations.Count > 0)
-                {
-                    comboBoxName.Items.Clear();
-                    foreach (StationBoard station in stations)
-                    {
-                        comboBoxName.Items.Add(station.Name);
-                    }
-                }
-                comboBoxName.Text = "";
-                comboBoxName.SelectedIndex = 0;
-            }
+            combox(cbAbfahrt);
         }
     }
 }

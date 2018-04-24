@@ -75,5 +75,10 @@ namespace AppSwissTransport
             Form Abfahrt = new Abfahrtstafel();
             Abfahrt.Show();
         }
+
+        private void lblVon_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
